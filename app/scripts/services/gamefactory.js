@@ -16,7 +16,7 @@ angular.module('memoryGameApp')
             function generate(rows, cols) {
                   var matches = (rows * cols) / 2;
                   var memory = [];
-                  var letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'W', 'X', 'Y', 'Z'];
+                  var letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'W', 'X', 'Y', 'Z', 'AA', 'AB', 'BB', 'CC', 'DD', 'EE', 'FF', 'GG', 'HH', 'II'];
                   var items = letters;
 
                   /*
@@ -28,6 +28,8 @@ angular.module('memoryGameApp')
                         var letter = items[randLetter];
                         memory.push(letter);
                         items.splice(randLetter, 1);
+                        console.log(items);
+                        console.log(memory);
                   }
                   memory = _.shuffle(_.shuffle(memory.concat(memory)));
                   return memory;
