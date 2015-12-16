@@ -18,7 +18,7 @@
         <div class="alert alert-info text-center">
             <label for="time">Time: </label> <span ng-if="game.complete || game.inGame"><span ng-bind="game.totalTime"></span> seconds</span>
             <label for="move">Move: </label> <span ng-bind="game.totalMove"></span>
-        </div>        
+        </div>
     </div>
     <div class="row">
         <div class="tile-wrapper">
@@ -26,10 +26,9 @@
                 You win!
             </div>
             <div class="card-wrapper">
-                <div ng-repeat="card in game.deck" class="card-info">                    
+                <div ng-repeat="card in game.deck" class="card-info">
                     <div class="flip-card" tile-card ng-class="{'flip' : card.isFaceUp}" ng-click="game.isGuarding || game.check(card)" card="card">
-                                                                        
-                    </div>                    
+                    </div>
                 </div>
             </div>
         </div>
