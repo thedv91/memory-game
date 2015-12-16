@@ -5,3 +5,79 @@
     -o-transition: $transition;
     transition: $transition;
 }
+
+@mixin backface-visibility($backface-visibility) {
+    -webkit-backface-visibility: $backface-visibility;
+
+    /* Chrome, Safari, Opera */
+    backface-visibility: $backface-visibility;
+}
+
+@mixin transform-style($style) {
+    transform-style: $style;
+    -webkit-transform-style: $style;
+    -moz-transform-style: $style;
+}
+
+@mixin transform($transform) {
+    -webkit-transform: $transform;
+    -moz-transform: $transform;
+    -ms-transform: $transform;
+    -o-transform: $transform;
+    transform: $transform;
+}
+
+@mixin perspective($perspective) {
+    -webkit-perspective: $perspective;
+
+    /* Chrome, Safari, Opera */
+    perspective: $perspective;
+}
+
+@mixin display-flex {
+    display: -webkit-box;
+
+    /* OLD - iOS 6-, Safari 3.1-6, BB7 */
+    display: -ms-flexbox;
+
+    /* TWEENER - IE 10 */
+    display: -webkit-flex;
+
+    /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
+    display: flex;
+
+    /* NEW, Spec - Firefox, Chrome, Opera */
+}
+
+@mixin flex-direction($direction) {
+    flex-direction: $direction;
+    -webkit-flex-direction: $direction;
+    -ms-flex-direction: $direction;
+}
+
+@mixin user-select($select) {
+    user-select: $select;
+    -moz-user-select: $select;
+    -webkit-user-select: $select;
+    -ms-user-select: $select;
+}
+
+@mixin flex-shrink($shrink) {
+    flex-shrink: $shrink;
+    -webkit-flex-shrink: $shrink;
+}
+
+@mixin flex-wrap($wrap) {
+    flex-wrap: $wrap;
+    -webkit-flex-wrap: $wrap;
+}
+
+@mixin justify-content($style) {
+    justify-content: $style;
+    -webkit-justify-content: $style;
+}
+
+@mixin align-items($align) {
+    align-items: $align;
+    -webkit-align-items: $align;
+}

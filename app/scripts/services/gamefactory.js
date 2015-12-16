@@ -29,37 +29,20 @@ angular.module('memoryGameApp')
                         memory.push(letter);
                         items.splice(randLetter, 1);
                   }
-                  memory = _.shuffle(memory.concat(memory));
+                  memory = _.shuffle(_.shuffle(memory.concat(memory)));
                   return memory;
-            };
+            }
             return {
                   newGame: function(rows, cols) {
                         var key = generate(rows, cols);
-                        console.log(key);
-                        var memory = {};
-                        memory.rows = [];
+                        var memory = [];
                         for (var i = 0; i < key.length; i++) {
                               var card = {};
                               card.isFaceUp = false;
                               card.isLock = false;
                               card.item = key[i];
-                              memory.rows.push(card);
+                              memory.push(card);
                         }
-                        // create each row
-                        /*for (var i = 0; i < rows; i++) {
-                              var row = {};
-                              row.cards = [];
-
-                              // creat each card in the row
-                              for (var j = 0; j < cols; j++) {
-                                    var card = {};
-                                    card.isFaceUp = false;
-                                    card.isLock = false;
-                                    card.item = key.pop();
-                                    row.cards.push(card);
-                              }
-                              memory.rows.push(row);
-                        }*/
                         return memory;
                   }
             };

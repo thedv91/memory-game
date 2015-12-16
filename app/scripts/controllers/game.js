@@ -8,111 +8,120 @@
  * Controller of the memoryGameApp
  */
 angular.module('memoryGameApp')
-	.controller('GameCtrl', ['$timeout', 'GameFactory', function($timeout, GameFactory) {
+	.controller('GameCtrl', ['$timeout', '$interval', 'GameFactory', 'SoundFactory', function($timeout, $interval, GameFactory, SoundFactory) {
 		var self = this;
 		var currentSessionOpen = false;
 		var previousCard = null;
 		var numPairs = 0;
+		var timer = null;
+		var interval = null;
+		self.totalTime = 0;
+		self.totalMove = 0;
+		self.isGuarding = true;
+		self.inGame = false;
+		self.complete = false;
+
 		self.grid = {};
 		self.grid.rows = 8;
 		self.grid.cols = 8;
+		self.deck = [];
 
 
-		self.isGuarding = true;
-		self.inGame = false;
 
+		/**
+		 * Init new game
+		 */
 		self.newGame = function() {
-			// I need to fix this redundancy. I initially did not create this
-			// game with a start button.
+			self.stopTimer();
+			self.resetGame();
+			self.totalTime = 0;
 			self.deck = GameFactory.newGame(self.grid.rows, self.grid.cols);
-			// set the time of 1 minutes and remove the cards guard
-			self.timeLimit = 60000;
-			self.isGuarding = false;
-			self.inGame = true;
-
-			console.log(self.deck);
-
-			self.startTimer = function() {
-				self.timeLimit -= 1000;
-				self.isCritical = self.timeLimit <= 10000 ? true : false;
-
-				timer = $timeout(self.startTimer, 1000);
-				if (self.timeLimit === 0) {
-					self.stopTimer();
-					self.isGuarding = true;
-				}
-			};
+			self.isGuarding = true;
+			self.inGame = false;
 		};
 
-		// start the timer as soon as the player presses start		
+		/**
+		 * Start game
+		 */
 		self.start = function() {
-			// I need to fix this redundancy. I initially did not create this
-			// game with a start button.
-			self.deck = GameFactory.newGame(self.grid.rows, self.grid.cols);
-			// set the time of 1 minutes and remove the cards guard
-			self.timeLimit = 60000;
 			self.isGuarding = false;
 			self.inGame = true;
 
-			console.log(self.deck);
+			interval = $interval(function() {
+				self.totalTime++;
+			}, 1000);
 
-			self.startTimer = function() {
-				self.timeLimit -= 1000;
-				self.isCritical = self.timeLimit <= 10000 ? true : false;
-
-				timer = $timeout(self.startTimer, 1000);
-				if (self.timeLimit === 0) {
-					self.stopTimer();
-					self.isGuarding = true;
-				}
-			};
 		};
 
+
+		/**
+		 * Check section on click
+		 */
 		self.check = function(card) {
 			if (card.isLock || card.isFaceUp) {
 				console.log('return');
 				return;
 			}
+			SoundFactory.flip().play();
 			if (currentSessionOpen && previousCard !== card && previousCard.item === card.item && !card.isFaceUp) {
+
+				//Prevoius card match current card								
 				card.isFaceUp = true;
 				card.isLock = previousCard.isLock = true;
 				previousCard = null;
 				currentSessionOpen = false;
 				numPairs++;
+				self.totalMove++;
 			} else if (currentSessionOpen && previousCard !== card && previousCard.item !== card.item && !card.isFaceUp) {
+
+				//Previous card not match current card				
 				self.isGuarding = true;
 				card.isFaceUp = true;
 				currentSessionOpen = false;
+				self.totalMove++;
 				$timeout(function() {
 					previousCard.isFaceUp = card.isFaceUp = false;
 					previousCard = null;
-					self.isGuarding = self.timeLimit ? false : true;
+					self.isGuarding = false;
 				}, 1000);
 			} else {
+
+				//Current card start open				
 				card.isFaceUp = true;
 				currentSessionOpen = true;
 				previousCard = card;
 			}
 
-			if (numPairs === 8) {
+			/**
+			 * End game
+			 */
+			if (numPairs === Math.floor(self.deck.length / 2)) {
+				self.complete = true;
 				self.stopTimer();
 			}
-		}; //end of check()
+		};
 
-		// for the timer
-		self.timeLimit = 60000;
+		// for the timer		
 		self.isCritical = false;
 
-		var timer = null;
-
-
-		// function to stop the timer
 		self.stopTimer = function() {
-			$timeout.cancel(timer);
-			self.inGame = false;
-			previousCard = null;
+			$interval.cancel(interval);
+		};
+
+		self.resetGame = function() {
+			self.complete = false;
+			self.totalMove = 0;
 			currentSessionOpen = false;
+			previousCard = null;
 			numPairs = 0;
+			timer = null;
+			self.totalTime = 0;
+			self.isGuarding = true;
+			self.inGame = false;
+		};
+
+		self.completeGame = function() {
+
 		};
 
 
