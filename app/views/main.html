@@ -11,8 +11,8 @@
         <button type="button" ng-click="main.generate()" class="btn btn-default">Generate</button>
     </form>
 
-    <div ng-repeat="row in game.deck.rows">
-        <div ng-repeat="card in row.cards" class="card-info">
+    <div ng-repeat="card in game.deck.rows">
+        <div class="card-info">
             <div class="flip-card" ng-class="{'flip' : card.isFaceUp}" ng-click="game.isGuarding || game.check(card)">
                 <div class="flipper">
                     <div class="front">
@@ -27,5 +27,4 @@
         </div>
     </div>    
     <button type="button" class="btn btn-default btn-lg" ng-disabled="game.inGame == true" ng-click="game.start()">Start</button>
-    {{main.width}}x{{main.height}}
 </div>

@@ -16,7 +16,7 @@ angular.module('memoryGameApp')
             function generate(rows, cols) {
                   var matches = (rows * cols) / 2;
                   var memory = [];
-                  var letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'W', 'X', 'Y', 'Z'];
+                  var letters = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'W', 'X', 'Y', 'Z'];
                   var items = letters;
 
                   /*
@@ -35,11 +35,18 @@ angular.module('memoryGameApp')
             return {
                   newGame: function(rows, cols) {
                         var key = generate(rows, cols);
+                        console.log(key);
                         var memory = {};
                         memory.rows = [];
-
+                        for (var i = 0; i < key.length; i++) {
+                              var card = {};
+                              card.isFaceUp = false;
+                              card.isLock = false;
+                              card.item = key[i];
+                              memory.rows.push(card);
+                        }
                         // create each row
-                        for (var i = 0; i < rows; i++) {
+                        /*for (var i = 0; i < rows; i++) {
                               var row = {};
                               row.cards = [];
 
@@ -52,7 +59,7 @@ angular.module('memoryGameApp')
                                     row.cards.push(card);
                               }
                               memory.rows.push(row);
-                        }
+                        }*/
                         return memory;
                   }
             };

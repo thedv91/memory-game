@@ -2,7 +2,11 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
 
 // bower:scss
 @import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
+
 // endbower
+
+@import "variables";
+@import "mixin";
 
 a {
     outline: none;
@@ -27,24 +31,32 @@ a {
     }
 }
 
+.card-info {
+    margin: 20px;
+    width: $card-width;
+    height: $card-height;
+    float: left;
+}
+
 .flip-card {
     perspective: 1000;
-    width: 320px;
-    height: 480px;
+    width: 100%;
+    height: 100%;
 
     .flipper {
         transform: rotateY(0deg);
-        transition: all 0.3s linear;
+
+        @include transition(all 0.3s linear);
+
         position: relative;
         box-shadow: 0.5px 2.5px #ccc;
         -moz-transform-style: preserve-3d;
         -webkit-transform-style: preserve-3d;
         transform-style: preserve-3d;
-        -moz-transition: all .25s linear;
-        -webkit-transition: all .25s linear;
-        transition: all .25s linear;
         -webkit-backface-visibility: hidden;
         backface-visibility: hidden;
+        width: 100%;
+        height: 100%;
     }
 
     &.flip {
@@ -54,8 +66,8 @@ a {
     }
 
     .front {
-        width: 320px;
-        height: 480px;
+        width: 100%;
+        height: 100%;
         position: absolute;
         top: 0;
         left: 0;
@@ -65,20 +77,14 @@ a {
     }
 
     .back {
-        width: 320px;
-        height: 480px;
+        width: 100%;
+        height: 100%;
         position: absolute;
         top: 0;
         left: 0;
         background-color: #68c39f;
         transform: rotateY(0deg);
     }
-}
-
-.card-info {
-    margin: 20px;
-    width: 25%;
-    float: left;
 }
 
 .card {

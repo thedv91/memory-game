@@ -13,19 +13,48 @@ angular.module('memoryGameApp')
 		var currentSessionOpen = false;
 		var previousCard = null;
 		var numPairs = 0;
+		self.grid = {};
+		self.grid.rows = 8;
+		self.grid.cols = 8;
+
 
 		self.isGuarding = true;
 		self.inGame = false;
 
-		// start the timer as soon as the player presses start
-		self.start = function() {
+		self.newGame = function() {
 			// I need to fix this redundancy. I initially did not create this
 			// game with a start button.
-			self.deck = GameFactory.newGame(4, 6);
+			self.deck = GameFactory.newGame(self.grid.rows, self.grid.cols);
 			// set the time of 1 minutes and remove the cards guard
 			self.timeLimit = 60000;
 			self.isGuarding = false;
 			self.inGame = true;
+
+			console.log(self.deck);
+
+			self.startTimer = function() {
+				self.timeLimit -= 1000;
+				self.isCritical = self.timeLimit <= 10000 ? true : false;
+
+				timer = $timeout(self.startTimer, 1000);
+				if (self.timeLimit === 0) {
+					self.stopTimer();
+					self.isGuarding = true;
+				}
+			};
+		};
+
+		// start the timer as soon as the player presses start		
+		self.start = function() {
+			// I need to fix this redundancy. I initially did not create this
+			// game with a start button.
+			self.deck = GameFactory.newGame(self.grid.rows, self.grid.cols);
+			// set the time of 1 minutes and remove the cards guard
+			self.timeLimit = 60000;
+			self.isGuarding = false;
+			self.inGame = true;
+
+			console.log(self.deck);
 
 			self.startTimer = function() {
 				self.timeLimit -= 1000;
