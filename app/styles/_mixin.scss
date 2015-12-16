@@ -7,16 +7,17 @@
 }
 
 @mixin backface-visibility($backface-visibility) {
-    -webkit-backface-visibility: $backface-visibility;
-
-    /* Chrome, Safari, Opera */
     backface-visibility: $backface-visibility;
+    -o-backface-visibility: $backface-visibility;
+    -webkit-backface-visibility: $backface-visibility;
+    -moz-backface-visibility: $backface-visibility;
 }
 
 @mixin transform-style($style) {
     transform-style: $style;
     -webkit-transform-style: $style;
     -moz-transform-style: $style;
+    -o-transform-style: $style;
 }
 
 @mixin transform($transform) {
