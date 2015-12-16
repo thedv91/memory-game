@@ -73,7 +73,7 @@ a {
     }
 
     .flip-card {
-        @include perspective(1000);
+        @include perspective(600px);
 
         @include user-select(none);
 
