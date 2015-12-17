@@ -20,6 +20,7 @@ angular.module('memoryGameApp')
 		self.isGuarding = true;
 		self.inGame = false;
 		self.complete = false;
+		self.hasNewGame = false;
 
 		self.grid = {};
 		self.grid.rows = 8;
@@ -101,14 +102,12 @@ angular.module('memoryGameApp')
 			}
 		};
 
-		// for the timer		
-		self.isCritical = false;
-
 		self.stopTimer = function() {
 			$interval.cancel(interval);
 		};
 
 		self.resetGame = function() {
+			self.hasNewGame = true;
 			self.complete = false;
 			self.totalMove = 0;
 			currentSessionOpen = false;
