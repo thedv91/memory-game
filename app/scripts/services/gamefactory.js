@@ -28,8 +28,6 @@ angular.module('memoryGameApp')
                         var letter = items[randLetter];
                         memory.push(letter);
                         items.splice(randLetter, 1);
-                        console.log(items);
-                        console.log(memory);
                   }
                   memory = _.shuffle(_.shuffle(memory.concat(memory)));
                   return memory;
