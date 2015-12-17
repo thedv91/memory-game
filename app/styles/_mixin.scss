@@ -82,3 +82,9 @@
     align-items: $align;
     -webkit-align-items: $align;
 }
+
+@mixin flex($flex) {
+    flex: $flex;
+    -ms-flex: $flex;
+    -webkit-flex: $flex;
+}

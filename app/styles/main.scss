@@ -2,10 +2,12 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
 
 // bower:scss
 @import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
+
 // endbower
 
 @import "variables";
 @import "mixin";
+@import "queries";
 
 a {
     outline: none;
@@ -43,16 +45,39 @@ a {
 
         @include flex-wrap(wrap);
 
-        @include justify-content(center);
+        @include justify-content(space-between);
 
         @include align-items(center);
 
         .card-info {
             @include flex-shrink(0);
 
-            margin: 10px;
-            width: $card-width;
-            height: $card-height;
+            @include display-flex;
+
+            @include justify-content(center);
+
+            @include align-items(center);
+
+            flex-basis: 12.5%;
+            flex-grow: 1;
+            padding: 10px;
+        }
+
+        @include phab-tablet {
+            .card-info {
+                @include flex(1 0 25%);
+
+                flex-basis: 25%;
+            }
+        }
+
+
+        @include mobile {
+            .card-info {
+                @include flex(1 0 50%);
+
+                flex-basis: 50%;
+            }
         }
     }
 
@@ -62,8 +87,8 @@ a {
         @include user-select(none);
 
         font-family: 'Open Sans Condensed', sans-serif;
-        width: 100%;
-        height: 100%;
+        width: $card-width;
+        height: $card-height;
 
         .flipper {
             @include transform(rotateY(0deg));
@@ -72,7 +97,6 @@ a {
 
             @include transform-style(preserve-3d);
 
-            position: absolute;
             border-radius: 5px;
             border: 5px solid;
             border-color: $card-border;
