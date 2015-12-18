@@ -54,9 +54,10 @@ angular.module('memoryGameApp')
 
 		};
 
-
 		/**
 		 * Check section on click
+		 * @param  Object card
+		 * @return void
 		 */
 		self.check = function(card) {
 			if (card.isLock || card.isFaceUp) {
@@ -102,10 +103,18 @@ angular.module('memoryGameApp')
 			}
 		};
 
+		/**
+		 * Stop count time
+		 * @return void
+		 */
 		self.stopTimer = function() {
 			$interval.cancel(interval);
 		};
 
+		/**
+		 * Reset Game
+		 * @return void
+		 */
 		self.resetGame = function() {
 			self.hasNewGame = true;
 			self.complete = false;
@@ -117,10 +126,6 @@ angular.module('memoryGameApp')
 			self.totalTime = 0;
 			self.isGuarding = true;
 			self.inGame = false;
-		};
-
-		self.completeGame = function() {
-
 		};
 
 
