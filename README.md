@@ -11,9 +11,9 @@ Run `npm install & bower install`
 
 ## Build & development
 
-Build with Grunt run: `grunt serve:dist`
+Build with Grunt run: `grunt build`
 
-Build with Gulp run: `gulp bower & gulp`
+Build with Gulp run: `gulp bower & gulp build`
 
 ## Testing
 
