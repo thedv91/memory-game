@@ -23,8 +23,8 @@ angular.module('memoryGameApp')
 		self.hasNewGame = false;
 
 		self.grid = {};
-		self.grid.rows = 8;
-		self.grid.cols = 8;
+		self.grid.rows = 4;
+		self.grid.cols = 4;
 		self.deck = [];
 
 
