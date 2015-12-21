@@ -38,17 +38,17 @@ a {
 
     .card-wrapper {
         @include desktop {
-            max-width: 660px;
+            max-width: 500px;
         }
 
 
         @include tablet {
-            max-width: 660px;
+            max-width: 500px;
         }
 
 
         @include max-width($desktop) {
-            max-width: 660px;
+            max-width: 500px;
         }
 
 
@@ -65,7 +65,7 @@ a {
         .card-info {
             @include flex-shrink(0);
 
-            @include display-flex;
+            /* @include display-flex; */
 
             @include justify-content(center);
 
@@ -143,7 +143,7 @@ a {
             width: 100%;
             text-align: center;
             font-weight: bold;
-            font-size: 6em;
+            font-size: 5em;
             position: absolute;
 
             @include backface-visibility(hidden);
